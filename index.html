@@ -3454,9 +3454,9 @@ async function fcSubmitCurrent() {
 
   var userMsg = 'SITUATION: ' + fc.situation + '\nREAKTION DER ELTERN: ' + val + '\n\nBitte analysiere diese Reaktion konkret.';
   try {
-    var r = await fetch('https://api.anthropic.com/v1/messages', {
+    var r = await fetch('https://montessori-proxy.liam-broemer.workers.dev', {
       method:'POST',
-      headers:{'Content-Type':'application/json','anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+      headers:{'Content-Type':'application/json','anthropic-version':'2023-06-01',},
       body: JSON.stringify({ model:'claude-sonnet-4-20250514', max_tokens:500, system:FEEDBACK_SYS, messages:[{role:'user',content:userMsg}] })
     });
     var data = await r.json();
@@ -3689,9 +3689,9 @@ async function submitPractice() {
     'Bitte analysiere diese Reaktion konkret und gib Feedback.';
 
   try {
-    var r = await fetch('https://api.anthropic.com/v1/messages', {
+    var r = await fetch('https://montessori-proxy.liam-broemer.workers.dev', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
+      headers: { 'Content-Type': 'application/json', 'anthropic-version': '2023-06-01',  },
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
         max_tokens: 400,
@@ -4453,7 +4453,7 @@ async function chatGo() {
   if (chatHist.length > 10) chatHist = chatHist.slice(chatHist.length - 10);
   showTyping();
   try {
-    var r = await fetch('https://api.anthropic.com/v1/messages', {method:'POST', headers:{'Content-Type':'application/json','anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'}, body:JSON.stringify({model:'claude-haiku-4-5-20251001', max_tokens:1200, system:SYS, messages:chatHist})});
+    var r = await fetch('https://montessori-proxy.liam-broemer.workers.dev', {method:'POST', headers:{'Content-Type':'application/json','anthropic-version':'2023-06-01',}, body:JSON.stringify({model:'claude-haiku-4-5-20251001', max_tokens:1200, system:SYS, messages:chatHist})});
     var data = await r.json();
     var ti = document.getElementById('tind'); if (ti) ti.remove();
     if (data.content && data.content[0] && data.content[0].text) {
